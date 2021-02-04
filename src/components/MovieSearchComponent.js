@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieService from '../services/MovieService';
 
-class MovieComponent extends React.Component {
+class MovieSearchComponent extends React.Component {
 
     constructor(props){
         super(props)
@@ -45,4 +45,4 @@ class MovieComponent extends React.Component {
     }
 }
 
-export default MovieComponent
+export default MovieSearchComponent
