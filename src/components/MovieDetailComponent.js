@@ -6,12 +6,13 @@ class MovieDetailComponent extends React.Component {
     constructor(props){
         super(props)
         this.state = {
+            id: this.props.match.params.id,
             movieDetail:[]
         }
     }
 
     componentDidMount(){
-        MovieService.getMoviesById().then((response) => {
+        MovieService.getMoviesById(this.state.id).then((response) => {
             this.setState({ movieDetail: response.data})
         });
     }
