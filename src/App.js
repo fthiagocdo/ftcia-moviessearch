@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import MovieSearchComponent from './components/MovieSearchComponent';
 import MovieDetailComponent from './components/MovieDetailComponent';
 import HeaderComponent from './components/HeaderComponent';
-import FooterComponent from './components/FooterComponent';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
             <Route path="/detail/:id" component={MovieDetailComponent}></Route>
           </Switch>
         </div>
-        <FooterComponent />
       </Router>
     </div>
   );
