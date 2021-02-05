@@ -2,7 +2,7 @@
 
 <p align="left">Frontend desenvolvido em React, Bootstrap, Axios e React-Cookie para a consulta de filmes por nome. Esta api consome dados disponibilizados por <a href="https://github.com/fthiagocdo/ftcia-moviesapi" target="_blank">Ftcia-MoviesApi</a></p>
 
-<p align="left">Este projeto foi desenvolvido utilizando [Create React App] (https://github.com/facebook/create-react-app).</p>
+<p align="left">Este projeto foi desenvolvido utilizando [Create React App](https://github.com/facebook/create-react-app).</p>
 
 ### Features
 
@@ -16,8 +16,7 @@
 Antes de começar, você vai precisar ter instalado em sua máquina:
 [Node.js](https://nodejs.org/en/download/) 
 
-Descrevo a execução dos passos utilizando o Visual Studio Code:
-[Visual Studio Code](https://code.visualstudio.com/) 
+Descrevo a execução dos passos utilizando o [Visual Studio Code](https://code.visualstudio.com/).
 
 Caso utilize outro editor, os passos podem ser diferentes.
 
