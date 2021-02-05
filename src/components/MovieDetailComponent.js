@@ -15,7 +15,8 @@ class MovieDetailComponent extends React.Component {
             id: this.props.match.params.id,
             movieDetail:[],
             imdbRating: '',
-            rottenRating: ''
+            rottenRating: '',
+            previousSearch: this.props.cookies.get('previousSearch') || null
         }
 
         this.returnToSearch = this.returnToSearch.bind(this);
@@ -34,10 +35,13 @@ class MovieDetailComponent extends React.Component {
     }
 
     returnToSearch() {
-        const { cookies } = this.props;
-        cookies.set('activeSearch', 'true', { path: '/' });
+        this.props.cookies.remove('previousSearch', { path: '/' });
         
-        this.props.history.push(`/`);
+        if(this.state.previousSearch) {
+            this.props.history.push(`/search/${this.state.previousSearch}`);
+        } else {
+            this.props.history.push(`/`);
+        }
     }
 
     AddRemoveFavorites() {
@@ -75,7 +79,7 @@ class MovieDetailComponent extends React.Component {
                                     <div className="col-md-3">IMDB: {this.state.imdbRating ? this.state.imdbRating.Value : ''}</div>
                                     <div className="col-md-3">Rotten: {this.state.rottenRating ? this.state.rottenRating.Value : ''}</div>
                                     <div className="col-md-4">
-                                    <button className="btn btn-info" onClick={this.AddRemoveFavorites}>{ this.getLabelFavorites() }</button>
+                                    <button className="btn btn-success" onClick={this.AddRemoveFavorites}>{ this.getLabelFavorites() }</button>
                                     </div>
                                     <div className="col-md-2"></div>
                                 </div>
@@ -109,7 +113,7 @@ class MovieDetailComponent extends React.Component {
 
                 <br></br>
 
-                <button onClick={this.returnToSearch} className="btn btn-info">Back</button>
+                <button onClick={this.returnToSearch} className="btn btn-success">Back</button>
             </div>
         )
     }

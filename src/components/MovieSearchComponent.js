@@ -15,14 +15,26 @@ class MovieSearchComponent extends React.Component {
 
         this.state = {
             searchKey: '',
-            movies:[]
+            previousSearch: this.props.match.params.previousSearch || null,
+            movies:[],
+            noResults: false
         }
 
         this.getMovieDetail = this.getMovieDetail.bind(this);
         this.searchMovie = this.searchMovie.bind(this);
-        //this.setCookie = this.setCookie.bind(this);
 
         this.changeSearchKeyHandler = this.changeSearchKeyHandler.bind(this);
+    }
+
+    componentDidMount(){
+        if(this.state.previousSearch){
+            const key = this.state.previousSearch; 
+            this.setState({searchKey: key});
+
+            MovieService.getMoviesByName(key).then((response) => {
+                this.setState({ movies: response.data})
+            });
+        }        
     }
 
     changeSearchKeyHandler = (event) => {
@@ -32,38 +44,52 @@ class MovieSearchComponent extends React.Component {
     searchMovie() {
         if(this.state.searchKey !== ''){
             MovieService.getMoviesByName(this.state.searchKey).then((response) => {
-                this.setState({ movies: response.data})
+                this.setState({ 
+                    movies: response.data,
+                    noResults: response.data.length ? false : true
+                })
+
+                console.log('noResults => '+this.state.noResults);
             });
         }
     }
 
     getMovieDetail(id) {
-        //this.setCookie();
+        this.setCookie();
         this.props.history.push(`/detail/${id}`);
     }
 
-    /*setCookie() {
-        const { cookies } = this.props;
-        cookies.set('lastSearch', this.state.searchKey, { path: '/' });
-    }*/
+    setCookie() {
+        this.props.cookies.set('previousSearch', this.state.searchKey, { path: '/' });
+    }
 
     getList(){
         if(this.state.movies.length){
             return <div>
-                    <div className="row">
                         <div className="card col-md-12">
                             <h1 className="text-center" style={{ marginTop: "10px" }}>Search Results</h1>
                             <div className="card-body">
-                                {
-                                    this.state.movies.map(movie => 
-                                        <img src={movie.Poster} class="img-fluid col-md-3" alt={movie.Title} 
-                                            onClick={ () => this.getMovieDetail(movie.imdbID) } style={{ marginTop: "10px" }}></img>
-                                    )
-                                }
+                                <div className="row">
+                                    {
+                                        this.state.movies.map(movie => 
+                                            <img src={movie.Poster} className="img-fluid col-md-3" alt={movie.Title} 
+                                                onClick={ () => this.getMovieDetail(movie.imdbID) } style={{ marginTop: "10px" }}></img>
+                                        )
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+        } else if(this.state.noResults) {
+            return <div>
+                        <div className="card col-md-12">
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="text-center col-md-12">No results.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
         }
     }
 
@@ -85,6 +111,8 @@ class MovieSearchComponent extends React.Component {
                 </div>
                 
                 {this.getList()}
+
+                <br></br>
             </div>
         )
     }

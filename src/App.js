@@ -13,6 +13,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route path="/" exact component={MovieSearchComponent}></Route>
+            <Route path="/search/:previousSearch" component={MovieSearchComponent}></Route>
             <Route path="/detail/:id" component={MovieDetailComponent}></Route>
           </Switch>
         </div>
