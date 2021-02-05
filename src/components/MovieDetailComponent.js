@@ -14,58 +14,102 @@ class MovieDetailComponent extends React.Component {
         this.state = {
             id: this.props.match.params.id,
             movieDetail:[],
+            imdbRating: '',
+            rottenRating: ''
         }
 
         this.returnToSearch = this.returnToSearch.bind(this);
+        this.AddRemoveFavorites = this.AddRemoveFavorites.bind(this);
+        this.getLabelFavorites = this.getLabelFavorites.bind(this);
     }
 
     componentDidMount(){
         MovieService.getMoviesById(this.state.id).then((response) => {
-            this.setState({ movieDetail: response.data})
+            this.setState({ 
+                movieDetail: response.data,
+                imdbRating: response.data.Ratings.find(element => element.Source === 'Internet Movie Database'),
+                rottenRating: response.data.Ratings.find(element => element.Source === 'Rotten Tomatoes'),   
+            })
         });
     }
 
     returnToSearch() {
         const { cookies } = this.props;
         cookies.set('activeSearch', 'true', { path: '/' });
-
+        
         this.props.history.push(`/`);
+    }
+
+    AddRemoveFavorites() {
+        const isFavorite = this.props.cookies.get(this.state.id) || null;
+        
+        if(isFavorite){
+            this.props.cookies.remove(this.state.movieDetail.imdbID, { path: '/' });
+        }else{
+            this.props.cookies.set(this.state.movieDetail.imdbID, true, { path: '/' });
+        }
+    }
+
+    getLabelFavorites() {
+        const isFavorite = this.props.cookies.get(this.state.id) || null;
+        if(isFavorite){
+            return 'Remove from favorites';
+        } else {
+            return 'Add to favorites';
+        }
     }
 
     render (){
         return (
             <div>
-                <h1 className="text-center">Movie Detail</h1>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>ImdbID</td>
-                            <td>Title</td>
-                            <td>Year</td>
-                            <td>Plot</td>
-                            <td>Actors</td>
-                            <td>Genre</td>
-                            <td>Director</td>
-                            <td>Name</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { 
-                            <tr key={this.state.movieDetail.imdbID}>
-                                <td>{this.state.movieDetail.imdbID}</td>   
-                                <td>{this.state.movieDetail.Title}</td>   
-                                <td>{this.state.movieDetail.Year}</td>   
-                                <td>{this.state.movieDetail.Plot}</td> 
-                                <td>{this.state.movieDetail.Actors}</td> 
-                                <td>{this.state.movieDetail.Genre}</td> 
-                                <td>{this.state.movieDetail.Director}</td>  
-                                <td>{this.state.name}</td>  
-                            </tr>
-                        }
-                    </tbody>
-                </table>
 
-                <button onClick={this.returnToSearch} className="btn btn-info">Voltar</button>
+                <br></br>
+
+                <div className="card col-md-12">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-md-8">
+                                <h1 className="text-center" style={{marginBottom: "30px"}}>{this.state.movieDetail.Title}</h1>
+
+                                <div className="row">
+                                    <div className="col-md-3">IMDB: {this.state.imdbRating ? this.state.imdbRating.Value : ''}</div>
+                                    <div className="col-md-3">Rotten: {this.state.rottenRating ? this.state.rottenRating.Value : ''}</div>
+                                    <div className="col-md-4">
+                                    <button className="btn btn-info" onClick={this.AddRemoveFavorites}>{ this.getLabelFavorites() }</button>
+                                    </div>
+                                    <div className="col-md-2"></div>
+                                </div>
+
+                                <br></br>
+                                <div>Plot</div>
+                                <p>{this.state.movieDetail.Plot}</p>
+
+                                <br></br>
+                                <div className="row">
+                                    <div className="col-md-4">
+                                    <div>Cast</div>
+                                        <p>{this.state.movieDetail.Actors}</p>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div>Genre</div>
+                                        <p>{this.state.movieDetail.Genre}</p>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div>Director</div>
+                                        <p>{this.state.movieDetail.Director}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4">
+                                <img src={this.state.movieDetail.Poster} class="img-fluid" alt={this.state.movieDetail.Title}></img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br></br>
+
+                <button onClick={this.returnToSearch} className="btn btn-info">Back</button>
             </div>
         )
     }

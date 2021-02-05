@@ -72,12 +72,14 @@ class MovieSearchComponent extends React.Component {
             <div>
                 <br></br>
 
-                <div className="row" style={{ marginBottom: "30px" }}>
-                    <div className="card col-md-12">
-                        <div className="card-body">
+                <div className="card col-md-12" style={{ marginBottom: "30px" }}>
+                    <div className="card-body">
+                        <div className="row">
                             <input name="searchKey" className="col-md-10" 
                                 value={this.state.searchKey} onChange={this.changeSearchKeyHandler}/>
-                            <button className="btn btn-success col-md-2" onClick={this.searchMovie}>Search</button>
+                            <div className="col-md-2 text-center">
+                                <button className="btn btn-success" onClick={this.searchMovie} style={{ width: "80%" }}>Search</button>
+                            </div>
                         </div>
                     </div>
                 </div>
