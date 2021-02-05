@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+<h1 align="center">Ftcia-MoviesSearch</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="left">Frontend desenvolvido em React, Bootstrap, Axios e React-Cookie para a consulta de filmes por nome. Esta api consome dados disponibilizados por <a href="https://github.com/fthiagocdo/ftcia-moviesapi" target="_blank">Ftcia-MoviesApi</a></p>
 
-## Available Scripts
+<p align="left">Este projeto foi desenvolvido utilizando [Create React App] (https://github.com/facebook/create-react-app).</p>
 
-In the project directory, you can run:
+### Features
 
-### `npm start`
+- [x] Consulta por Nome
+- [x] Exibe detalhe
+- [x] Adiciona/remove dos favoritos
+- [x] Recupera última consulta
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Pré-requisitos
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Antes de começar, você vai precisar ter instalado em sua máquina:
+[Node.js](https://nodejs.org/en/download/) 
 
-### `npm test`
+Descrevo a execução dos passos utilizando o Visual Studio Code:
+[Visual Studio Code](https://code.visualstudio.com/) 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Caso utilize outro editor, os passos podem ser diferentes.
 
-### `npm run build`
+### Rodando o Front End (aplicação)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Clone este repositório
+$ git clone <https://github.com/fthiagocdo/ftcia-moviessearch>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Acesse a pasta do projeto no terminal/cmd
+$ cd ftcia-moviessearch
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Abra o código fonte no Visual Studio
+$ code .
 
-### `npm run eject`
+# No diretório da aplicação, execute:
+$ npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Para iniciar o servidor, no diretório da aplicação, execute:
+$ npm start
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# O servidor iniciará na porta:3000 - acesse <http://localhost:3000>
+```
